@@ -11,8 +11,11 @@ elements = cadwork.get_auto_attribute_elements()
 
 for element in elements:
     actual_physical_volume = gc.get_actual_physical_volume(element)
-    list_volume = gc.get_list_volume(element)
-    if abs(list_volume - actual_physical_volume) < 0.0001:
+    real_width = gc.get_width(element)
+    real_height = gc.get_height(element)
+    real_length = gc.get_length(element)
+    real_dimensional_volume = real_width * real_height * real_length
+    if abs(real_dimensional_volume - actual_physical_volume) < 0.0001:
         cadwork.set_auto_attribute([element], 'List')
     else:
         cadwork.set_auto_attribute([element], 'Shop Drawings')
