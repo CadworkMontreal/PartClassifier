@@ -7,18 +7,12 @@
 import cadwork
 import geometry_controller as gc
 
-#####################################
-#                                   #
-# Quick Version (Ignores Drillings) #
-#                                   #
-#####################################
-
 elements = cadwork.get_auto_attribute_elements()
 
 for element in elements:
-    real_volume = gc.get_volume(element)
+    actual_physical_volume = gc.get_actual_physical_volume(element)
     list_volume = gc.get_list_volume(element)
-    if abs(list_volume - real_volume) < 0.0001:
+    if abs(list_volume - actual_physical_volume) < 0.0001:
         cadwork.set_auto_attribute([element], 'List')
     else:
         cadwork.set_auto_attribute([element], 'Shop Drawings')
